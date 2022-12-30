@@ -1,0 +1,32 @@
+"0","install.packages(""randomForest"")"
+"2","WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+"
+"2","Installing package into ‘C:/Users/Ibrahim Aliyev/AppData/Local/R/win-library/4.2’
+(as ‘lib’ is unspecified)
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/randomForest_4.7-1.1.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 222100 bytes (216 KB)
+"
+"2","downloaded 216 KB
+
+"
+"1","package ‘randomForest’ successfully unpacked and MD5 sums checked
+"
+"1","
+"
+"1",""
+"1","The downloaded binary packages are in
+	C:\Users\Ibrahim Aliyev\AppData\Local\Temp\RtmpCUGo2j\downloaded_packages"
+"1",""
+"1","
+"
+"0","library(randomForest)"
+"2","Warning: package ‘randomForest’ was built under R version 4.2.2"
+"2","randomForest 4.7-1.1
+"
+"2","Type rfNews() to see new features/changes/bug fixes.
+"

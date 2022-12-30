@@ -1,0 +1,28 @@
+"0","install.packages(""class"")"
+"2","WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+"
+"2","Installing package into ‘C:/Users/Ibrahim Aliyev/AppData/Local/R/win-library/4.2’
+(as ‘lib’ is unspecified)
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/class_7.3-20.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 97216 bytes (94 KB)
+"
+"2","downloaded 94 KB
+
+"
+"1","package ‘class’ successfully unpacked and MD5 sums checked
+"
+"1","
+"
+"1",""
+"1","The downloaded binary packages are in
+	C:\Users\Ibrahim Aliyev\AppData\Local\Temp\RtmpCUGo2j\downloaded_packages"
+"1",""
+"1","
+"
+"0","library(class)"
+"2","Warning: package ‘class’ was built under R version 4.2.2"

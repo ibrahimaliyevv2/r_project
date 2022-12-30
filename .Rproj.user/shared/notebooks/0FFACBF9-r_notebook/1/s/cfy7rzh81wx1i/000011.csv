@@ -1,0 +1,3 @@
+"0","training_df[-3] <- scale(training_df[-3])"
+"0","test_df[-3] <- scale(test_df[-3])"
+"0",""

@@ -1,0 +1,512 @@
+test_df[-4] <- scale(test_df[-4])
+head(training_df)
+head(test_df)
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+training_df[-4] <- scale(training_df[-4])
+test_df[-4] <- scale(test_df[-4])
+head(training_df)
+head(test_df)
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+svm_df<-df[1:4]
+head(svm_df)
+svm_df$facies<-factor(svm_df$facies, levels = c(0,1,2))
+set.seed(123)
+split <- sample.split(svm_df$facies, SplitRatio = 0.75) # 75% and 25%
+training_df <- subset(svm_df, split == TRUE)
+test_df <- subset(svm_df, split == FALSE)
+head(training_df) # training dataset
+head(test_df) # test dataset
+training_df[-4] <- scale(training_df[-4])
+test_df[-4] <- scale(test_df[-4])
+head(training_df)
+head(test_df)
+install.packages('e1071')
+library(e1071)
+svm_classifier <- svm(formula = facies ~ ., data=training_df, type = 'C-classification',kernel="linear")
+svm_classifier <- svm(formula = facies ~ ., data=training_df, type = 'C-classification',kernel="linear")
+svm_classifier
+y_pred = predict(svm_classifier, newdata = test_df[-4])
+y_pred
+confusion_matrix <- table(test_df[, 4], y_pred)
+confusion_matrix
+install.packages("ElemStatLearn")
+library(ElemStatLearn)
+install.packages(ElemStatLearn)
+library(ElemStatLearn)
+install.packages(elemStatLearn)
+library(elemStatLearn)
+library(elemStatLearn)
+library(ElemStatLearn)
+svm_accuracy = 1-mean(test_df$facies != y_pred)
+svm_accuracy
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+head(df)
+svm_df<-subset(df, select(depth, vsh, lithotype))
+svm_df<-subset(df, select = c(depth, vsh, lithotype))
+head(svm_df)
+svm_df$lithotype <-factor(svm$lithotype, levels = c('S1', 'S2', 'S3', 'S4', 'S5'))
+svm_df$lithotype <-factor(svm_df$lithotype, levels = c('S1', 'S2', 'S3', 'S4', 'S5'))
+svm_df$lithotype <-factor(svm_df$lithotype, levels = c('S1', 'S2', 'S3', 'S4', 'S5'))
+set.seed(123)
+split <- sample.split(svm_df$lithotype, SplitRatio = 0.75) # 75% and 25%
+training_df <- subset(svm_df, split == TRUE)
+test_df <- subset(svm_df, split == FALSE)
+head(training_df) # training dataset
+head(test_df) # test dataset
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+head(training_df)
+head(test_df)
+svm_classifier <- svm(formula = lithotype ~ ., data=training_df, type = 'C-classification',kernel="linear")
+svm_classifier
+y_pred = predict(svm_classifier, newdata = test_df[-3])
+y_pred
+confusion_matrix <- table(test_df[, 3], y_pred)
+confusion_matrix
+svm_accuracy = 1-mean(test_df$lithotype != y_pred)
+svm_accuracy
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+df<-read.csv("Data3.csv")
+head(df)
+df['lithotype'] <- NA
+head(df)
+df['lithotype'] <- 'S5'
+head(df)
+df[df$vsh<0.2, "lithotype"] <- "S1"
+df[df$vsh>0.2 & df$vsh<0.4, "lithotype"] <- "S2"
+df[df$vsh>0.4 & df$vsh<0.6, "lithotype"] <- "S3"
+df[df$vsh>0.6 & df$vsh<0.8, "lithotype"] <- "S4"
+head(df)
+dim(df)
+nrow(df)
+ncol(df)
+length(df)
+for (column in names(df))
+{
+print(typeof(df[column]))
+}
+for (column in attributes(df)$names)
+{
+print(typeof(df[column]))
+}
+print(df[1:10, ])
+head(df)
+tail(df)
+levels(factor(df$lithotype))
+levels(factor(df$facies))
+str(df)
+min(df$depth)
+max(df$depth)
+min(df$sp)
+max(df$sp)
+min(df$vsh)
+max(df$vsh)
+mean(df$depth)
+sd(df$depth)
+var(df$depth)
+quantile(df$depth, 0.25) # first quartile for depth column
+quantile(df$depth, 0.75) # third quartile for depth column
+summary(df)
+by(df, df$depth, summary)
+sd(df$depth) / mean(df$depth)
+install.packages("ggplot2")
+library(ggplot2)
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+df<-read.csv("Data3.csv")
+head(df)
+df['lithotype'] <- NA
+head(df)
+df['lithotype'] <- 'S5'
+head(df)
+df[df$vsh<0.2, "lithotype"] <- "S1"
+df[df$vsh>0.2 & df$vsh<0.4, "lithotype"] <- "S2"
+df[df$vsh>0.4 & df$vsh<0.6, "lithotype"] <- "S3"
+df[df$vsh>0.6 & df$vsh<0.8, "lithotype"] <- "S4"
+head(df)
+dim(df)
+nrow(df)
+ncol(df)
+length(df)
+for (column in names(df))
+{
+print(typeof(df[column]))
+}
+for (column in attributes(df)$names)
+{
+print(typeof(df[column]))
+}
+print(df[1:10, ])
+head(df)
+tail(df)
+levels(factor(df$lithotype))
+levels(factor(df$facies))
+str(df)
+min(df$depth)
+max(df$depth)
+min(df$sp)
+max(df$sp)
+min(df$vsh)
+max(df$vsh)
+mean(df$depth)
+sd(df$depth)
+var(df$depth)
+quantile(df$depth, 0.25) # first quartile for depth column
+quantile(df$depth, 0.75) # third quartile for depth column
+summary(df)
+sd(df$depth) / mean(df$depth)
+install.packages("ggplot2")
+library(ggplot2)
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+df<-read.csv("Data3.csv")
+head(df)
+df['lithotype'] <- NA
+head(df)
+df['lithotype'] <- 'S5'
+head(df)
+df[df$vsh<0.2, "lithotype"] <- "S1"
+df[df$vsh>0.2 & df$vsh<0.4, "lithotype"] <- "S2"
+df[df$vsh>0.4 & df$vsh<0.6, "lithotype"] <- "S3"
+df[df$vsh>0.6 & df$vsh<0.8, "lithotype"] <- "S4"
+head(df)
+dim(df)
+nrow(df)
+ncol(df)
+length(df)
+for (column in names(df))
+{
+print(typeof(df[column]))
+}
+for (column in attributes(df)$names)
+{
+print(typeof(df[column]))
+}
+print(df[1:10, ])
+head(df)
+tail(df)
+levels(factor(df$lithotype))
+levels(factor(df$facies))
+str(df)
+min(df$depth)
+max(df$depth)
+min(df$sp)
+max(df$sp)
+min(df$vsh)
+max(df$vsh)
+mean(df$depth)
+sd(df$depth)
+var(df$depth)
+quantile(df$depth, 0.25) # first quartile for depth column
+quantile(df$depth, 0.75) # third quartile for depth column
+summary(df)
+sd(df$depth) / mean(df$depth)
+boxplot(df$depth ~ df$facies, horizontal = TRUE, xlab = "Depth", ylab = "Facies", main="Facies versus Depth")
+boxplot(df$depth ~ df$lithotype, horizontal = TRUE, xlab = "Depth", ylab = "Lithotype", main="Lithotype versus Depth")
+install.packages('caTools')
+library(caTools)
+head(df)
+svm_df<-df[1:4]
+head(svm_df)
+svm_df$facies<-factor(svm_df$facies, levels = c(0,1,2))
+set.seed(123)
+split <- sample.split(svm_df$facies, SplitRatio = 0.75) # 75% and 25%
+training_df <- subset(svm_df, split == TRUE)
+test_df <- subset(svm_df, split == FALSE)
+head(training_df) # training dataset
+head(test_df) # test dataset
+training_df[-4] <- scale(training_df[-4])
+test_df[-4] <- scale(test_df[-4])
+head(training_df)
+head(test_df)
+install.packages('e1071')
+library(e1071)
+svm_classifier <- svm(formula = facies ~ ., data=training_df, type = 'C-classification',kernel="linear")
+svm_classifier
+y_pred = predict(svm_classifier, newdata = test_df[-4])
+y_pred
+confusion_matrix <- table(test_df[, 4], y_pred)
+confusion_matrix
+svm_accuracy = 1-mean(test_df$facies != y_pred)
+svm_accuracy
+head(df)
+svm_df<-subset(df, select = c(depth, vsh, lithotype))
+head(svm_df)
+svm_df$lithotype <-factor(svm_df$lithotype, levels = c('S1', 'S2', 'S3', 'S4', 'S5'))
+set.seed(123)
+split <- sample.split(svm_df$lithotype, SplitRatio = 0.75) # 75% and 25%
+training_df <- subset(svm_df, split == TRUE)
+test_df <- subset(svm_df, split == FALSE)
+head(training_df) # training dataset
+head(test_df) # test dataset
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+head(training_df)
+head(test_df)
+svm_classifier <- svm(formula = lithotype ~ ., data=training_df, type = 'C-classification',kernel="linear")
+svm_classifier
+y_pred = predict(svm_classifier, newdata = test_df[-3])
+y_pred
+confusion_matrix <- table(test_df[, 3], y_pred)
+confusion_matrix
+svm_accuracy = 1-mean(test_df$lithotype != y_pred)
+svm_accuracy
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+boxplot(df$depth ~ df$lithotype, horizontal = TRUE, xlab = "Depth", ylab = "Lithotype", main="Lithotype versus Depth")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+install.packages("class")
+library(class)
+install.packages("class")
+install.packages("class")
+library(class)
+knn_df <- subset(df, select = c(depth, vsh, facies))
+head(knn_df)
+knn_df$facies<-factor(knn_df$facies, levels = c(0,1,2))
+set.seed(123)
+split <- sample.split(knn_df$facies, SplitRatio = 0.75) # 75% and 25%
+set.seed(123)
+split <- sample.split(knn_df$facies, SplitRatio = 0.75) # 75% and 25%
+install.packages('caTools')
+library(caTools)
+set.seed(123)
+split <- sample.split(knn_df$facies, SplitRatio = 0.75) # 75% and 25%
+training_df <- subset(knn_df, split == TRUE)
+test_df <- subset(knn_df, split == FALSE)
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+head(training_df)
+head(test_df)
+knn_classifier <- knn(train = training_df, test = test_df, cl = training_df$facies, k=3)
+knn_classifier <- knn(train = training_df, test = test_df, cl = training_df$facies, k=3)
+knn_classifier
+confusion_matrix <- table(test_df[, 3], knn_classifier)
+confusion_matrix
+knn_accuracy = 1-mean(test_df$facies != knn_classifier)
+knn_accuracy
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+knn_df <- subset(df, select = c(depth, vsh, facies))
+head(knn_df)
+knn_df$facies<-factor(knn_df$facies, levels = c(0,1,2))
+set.seed(123)
+split <- sample.split(knn_df$facies, SplitRatio = 0.75) # 75% and 25%
+training_df <- subset(knn_df, split == TRUE)
+test_df <- subset(knn_df, split == FALSE)
+set.seed(123)
+split <- sample.split(knn_df$facies, SplitRatio = 0.75) # 75% and 25%
+training_df <- subset(knn_df, split == TRUE)
+test_df <- subset(knn_df, split == FALSE)
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+head(training_df)
+head(test_df)
+knn_classifier <- knn(train = training_df, test = test_df, cl = training_df$facies, k=1)
+knn_classifier
+confusion_matrix <- table(test_df[, 3], knn_classifier)
+confusion_matrix
+knn_accuracy = 1-mean(test_df$facies != knn_classifier)
+knn_accuracy
+knn_df <- subset(df, select = c(depth, vsh, facies))
+head(knn_df)
+knn_df$facies<-factor(knn_df$facies, levels = c(0,1,2))
+set.seed(123)
+split <- sample.split(knn_df$facies, SplitRatio = 0.75) # 75% and 25%
+training_df <- subset(knn_df, split == TRUE)
+test_df <- subset(knn_df, split == FALSE)
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+head(test_df)
+head(test_df[,-3])
+head(test_df)
+knn_classifier <- knn(train = training_df[,-3], test = test_df[,-3], cl = training_df$facies, k=1)
+knn_classifier
+confusion_matrix <- table(test_df[, 3], knn_classifier)
+confusion_matrix
+knn_accuracy = 1-mean(test_df$facies != knn_classifier)
+knn_accuracy
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+knn_df <- subset(df, select = c(depth, vsh, facies))
+head(knn_df)
+knn_df <- subset(df, select = c(depth, vsh, facies))
+head(knn_df)
+knn_df <- subset(df, select = c(depth, vsh, facies))
+head(knn_df)
+knn_df <- subset(df, select = c(depth, vsh, facies))
+head(knn_df)
+knn_df$facies<-factor(knn_df$facies, levels = c(0,1,2))
+set.seed(123)
+split <- sample.split(knn_df$facies, SplitRatio = 0.75) # 75% and 25%
+training_df <- subset(knn_df, split == TRUE)
+test_df <- subset(knn_df, split == FALSE)
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+head(training_df)
+head(test_df)
+knn_classifier <- knn(train = training_df[,-3], test = test_df[,-3], cl = training_df$facies, k=3)
+knn_classifier
+confusion_matrix <- table(test_df[, 3], knn_classifier)
+confusion_matrix
+knn_accuracy = 1-mean(test_df$facies != knn_classifier)
+knn_accuracy
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+knn_df <- subset(df, select = c(depth, vsh, lithotype))
+head(knn_df)
+knn_df$lithotype<-factor(knn_df$lithotype, levels = c('S1', 'S2', 'S3', 'S4', 'S5'))
+knn_df$lithotype<-factor(knn_df$lithotype, levels = c('S1', 'S2', 'S3', 'S4', 'S5'))
+set.seed(123)
+split <- sample.split(knn_df$lithotype, SplitRatio = 0.75) # 75% and 25%
+training_df <- subset(knn_df, split == TRUE)
+test_df <- subset(knn_df, split == FALSE)
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+head(training_df)
+head(test_df)
+knn_classifier <- knn(train = training_df[,-3], test = test_df[,-3], cl = training_df$lithotype, k=3)
+knn_classifier
+confusion_matrix <- table(test_df[, 3], knn_classifier)
+confusion_matrix
+knn_accuracy = 1-mean(test_df$lithotype != knn_classifier)
+knn_accuracy
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+install.packages("randomForest")
+library(randomForest)
+rf_df <- subset(df, select = c(depth, vsh, facies))
+head(rf_df)
+rf_df$facies<-factor(rf_df$facies, levels = c(0,1,2))
+set.seed(123)
+split <- sample.split(rf_df$facies, SplitRatio = 0.75) # 75% and 25%
+training_df <- subset(rf_df, split == TRUE)
+test_df <- subset(rf_df, split == FALSE)
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+head(training_df)
+head(test_df)
+rf_classifier = randomForest(x = training_df[,-3], y = training_df$facies, ntree = 500)
+rf_classifier
+y_pred = predict(rf_classifier, newdata = test_df[-3])
+y_pred
+confusion_matrix <- table(test_df[, 3], y_pred)
+confusion_matrix
+knn_accuracy = 1-mean(test_df$facies != y_pred)
+knn_accuracy
+rf_accuracy = 1-mean(test_df$facies != y_pred)
+rf_accuracy
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+rf_df <- subset(df, select = c(depth, vsh, lithotype))
+head(rf_df)
+rf_df$lithotype<-factor(rf_df$lithotype, levels = c('S1', 'S2', 'S3', 'S4', 'S5'))
+set.seed(123)
+split <- sample.split(rf_df$lithotype, SplitRatio = 0.75) # 75% and 25%
+training_df <- subset(rf_df, split == TRUE)
+test_df <- subset(rf_df, split == FALSE)
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+head(training_df)
+head(test_df)
+rf_classifier = randomForest(x = training_df[,-3], y = training_df$facies, ntree = 500)
+rf_classifier
+rf_classifier = randomForest(x = training_df[,-3], y = training_df$lithotype, ntree = 500)
+rf_classifier
+y_pred = predict(rf_classifier, newdata = test_df[-3])
+y_pred
+confusion_matrix <- table(test_df[, 3], y_pred)
+confusion_matrix
+rf_accuracy = 1-mean(test_df$lithotype != y_pred)
+rf_accuracy
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+svm_df<-subset(df, select = c(depth, vsh, facies))
+head(svm_df)
+svm_df$facies<-factor(svm_df$facies, levels = c(0,1,2))
+svm_df$facies<-factor(svm_df$facies, levels = c(0,1,2))
+set.seed(123)
+split <- sample.split(svm_df$facies, SplitRatio = 0.75) # 75% and 25%
+training_df <- subset(svm_df, split == TRUE)
+test_df <- subset(svm_df, split == FALSE)
+head(training_df) # training dataset
+head(test_df) # test dataset
+training_df[-4] <- scale(training_df[-4])
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+head(training_df)
+head(test_df)
+svm_classifier <- svm(formula = facies ~ ., data=training_df, type = 'C-classification',kernel="linear")
+install.packages('e1071')
+library(e1071)
+svm_classifier <- svm(formula = facies ~ ., data=training_df, type = 'C-classification',kernel="linear")
+svm_classifier
+y_pred = predict(svm_classifier, newdata = test_df[-4])
+y_pred
+confusion_matrix <- table(test_df[, 4], y_pred)
+confusion_matrix <- table(test_df[, 3], y_pred)
+confusion_matrix
+svm_accuracy = 1-mean(test_df$facies != y_pred)
+svm_accuracy
+svm_accuracy = 1-mean(test_df$facies != y_pred)
+svm_accuracy
+svm_classifier <- svm(formula = facies ~ ., data=training_df[,-3], type = 'C-classification',kernel="linear")
+svm_classifier <- svm(formula = facies ~ ., data=training_df, type = 'C-classification',kernel="linear")
+svm_classifier
+y_pred = predict(svm_classifier, newdata = test_df[-4])
+y_pred
+confusion_matrix <- table(test_df[, 3], y_pred)
+confusion_matrix
+svm_accuracy = 1-mean(test_df$facies != y_pred)
+svm_accuracy
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+source("C:/Users/Ibrahim Aliyev/Desktop/r_project/r_notebook.Rmd")
+library(rmarkdown)
+render("r_notebook.Rmd", output_format = "word_document")

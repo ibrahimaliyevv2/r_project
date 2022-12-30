@@ -1,0 +1,2 @@
+"0","svm_df<-subset(df, select = c(depth, vsh, lithotype))"
+"0","head(svm_df)"

@@ -1,0 +1,5 @@
+"0","df[df$vsh<0.2, ""lithotype""] <- ""S1"""
+"0","df[df$vsh>0.2 & df$vsh<0.4, ""lithotype""] <- ""S2"""
+"0","df[df$vsh>0.4 & df$vsh<0.6, ""lithotype""] <- ""S3"""
+"0","df[df$vsh>0.6 & df$vsh<0.8, ""lithotype""] <- ""S4"""
+"0","head(df)"

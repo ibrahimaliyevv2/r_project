@@ -1,0 +1,2 @@
+"0","knn_df <- subset(df, select = c(depth, vsh, lithotype))"
+"0","head(knn_df)"

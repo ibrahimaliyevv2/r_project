@@ -1,0 +1,6 @@
+"0","svm_accuracy = 1-mean(test_df$lithotype != y_pred)"
+"0","svm_accuracy"
+"1","[1]"
+"1"," 0.9884259"
+"1","
+"

@@ -1,0 +1,5 @@
+"0","set.seed(123)"
+"0","split <- sample.split(knn_df$lithotype, SplitRatio = 0.75) # 75% and 25%"
+"0",""
+"0","training_df <- subset(knn_df, split == TRUE)"
+"0","test_df <- subset(knn_df, split == FALSE)"

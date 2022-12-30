@@ -1,0 +1,1 @@
+"0","boxplot(df$depth ~ df$lithotype, horizontal = TRUE, xlab = ""Depth"", ylab = ""Lithotype"", main=""Lithotype versus Depth"")"

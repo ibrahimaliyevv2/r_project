@@ -1,0 +1,546 @@
+---
+title: "Ibrahim Aliyev - R Project"
+output: html_notebook
+---
+**Solutions to the tasks:**
+
+**Reading CSV file**
+
+Our first task is to read csv file. As we changed file format of give xlsx file into csv, and changed working directory into our specified directory, now we can call our file directly in built-in read.csv function. head() function is used to see first 6 row of data.
+```{r}
+df<-read.csv("Data3.csv")
+head(df)
+```
+Task 1 has been completed successfully.
+
+Let us see how to do task 2. Firstly we need to create new column and bind it to our dataframe. There is easy way like below. We create column with values NA and directly bind it to df.
+
+```{r}
+df['lithotype'] <- NA
+head(df)
+```
+Now, as mentioned in the task, we need to specify values for lithotype depending on values of vsh column. My suggestion like below:
+Firstly, I make all values as 'S5', because it is mentioned in section else and we don't know exact condition for these part. So, let's do it:
+```{r}
+df['lithotype'] <- 'S5'
+head(df)
+```
+Then we assign other values of lithotype for conditions given from values of vsh column. All else values that don't satisfy any of the given conditions still will be equal to S5.
+```{r}
+df[df$vsh<0.2, "lithotype"] <- "S1"
+df[df$vsh>0.2 & df$vsh<0.4, "lithotype"] <- "S2"
+df[df$vsh>0.4 & df$vsh<0.6, "lithotype"] <- "S3"
+df[df$vsh>0.6 & df$vsh<0.8, "lithotype"] <- "S4"
+head(df)
+```
+Task 2 has been completed successfully.
+
+Let us tend to task 3.
+Dimension of dataframe:
+```{r}
+dim(df)
+```
+Numebr of rows and columns
+```{r}
+nrow(df)
+ncol(df)
+```
+Length:
+```{r}
+length(df)
+```
+
+We can get types of attributes using attributes(df) and as we will do it for each column:
+```{r}
+for (column in names(df))
+{
+print(typeof(df[column]))
+}
+```
+This operation can be done like below too:
+```{r}
+for (column in attributes(df)$names)
+{
+print(typeof(df[column]))
+}
+```
+Let us print some rows of our dataframe. To do that we specify range of rows in first part of square brackets. Second part is used for colums. Below code will show first 10 rows:
+```{r}
+print(df[1:10, ])
+```
+
+But there are other built-in functions like head() and tail() to see first 6 and last 6 rows of our data:
+```{r}
+head(df)
+```
+
+```{r}
+tail(df)
+```
+
+Let us see levels of each column:
+```{r}
+levels(factor(df$lithotype))
+```
+
+```{r}
+levels(factor(df$facies))
+```
+
+Now let us discovery statistics of our dataframe.
+str stands for structure of dataset:
+```{r}
+str(df)
+```
+Minimum and maximum values can be found using built-in min() and max() functions:
+```{r}
+min(df$depth)
+max(df$depth)
+
+min(df$sp)
+max(df$sp)
+
+min(df$vsh)
+max(df$vsh)
+```
+
+Let us see mean, standard deviation and variance of column depth:
+```{r}
+mean(df$depth)
+sd(df$depth)
+var(df$depth)
+```
+We can easily get first and third quartile, also other quantiles by specifying percent as float number. quantile() function will be used in each case.
+For example, as first quartile is 25% we will take argument as 0.25, and for third quartile (75%) it will be 0.75:
+```{r}
+quantile(df$depth, 0.25) # first quartile for depth column
+quantile(df$depth, 0.75) # third quartile for depth column
+```
+
+
+Summary function gives us minimum, maximum values, 1st and 3rd quartile, mean and median directly for each column that contains numerical data:
+```{r}
+summary(df)
+```
+
+Let us find coefficient of variation for depth column. It is found by dividing standard deviation to mean:
+```{r}
+sd(df$depth) / mean(df$depth)
+```
+
+
+
+**Boxplot operations**
+
+Here we comparing columns Depth and Facies:
+```{r}
+boxplot(df$depth ~ df$facies, horizontal = TRUE, xlab = "Depth", ylab = "Facies", main="Facies versus Depth")
+```
+
+
+Now let us do second boxplot operation (Lithotype versus Depth):
+```{r}
+boxplot(df$depth ~ df$lithotype, horizontal = TRUE, xlab = "Depth", ylab = "Lithotype", main="Lithotype versus Depth")
+```
+**SVM**
+
+                                                
+Now, about SVM. Abbreviation SVM stands for Support Vector Machines that is supervised learning model and used to analyze data for classification and regression analysis.
+For the operations in SVM, we will use library caTools for splitting. Let's install it and check if it is work or not.
+```{r}
+install.packages('caTools')
+library(caTools)
+```
+```{r}
+head(df)
+```
+
+*SVM for facies column*
+
+Now we should specify our work area. After ignoring sp column and useless other columns we have dataset like below:
+```{r}
+svm_df<-subset(df, select = c(depth, vsh, facies))
+head(svm_df)
+```
+
+Here, our target feature will be facies column. Let us take it into account like below:
+```{r}
+svm_df$facies<-factor(svm_df$facies, levels = c(0,1,2))
+```
+
+Now, we are splitting our data into parts like training set and test set:
+```{r}
+set.seed(123)
+split <- sample.split(svm_df$facies, SplitRatio = 0.75) # 75% and 25%
+
+training_df <- subset(svm_df, split == TRUE)
+test_df <- subset(svm_df, split == FALSE)
+```
+Now let us see how our training set and test dataset look like:
+```{r}
+head(training_df) # training dataset
+```
+```{r}
+head(test_df) # test dataset
+```
+
+Let us scale our features to the size that computer can easily understand:
+```{r}
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+
+```
+
+After making this operation, our datasets will be like below:
+```{r}
+head(training_df)
+```
+
+```{r}
+head(test_df)
+```
+Now, we will try to fit SVM to our trained set. But for this operation we need to install package named "e1071". Let us install it and then continue to fitting.
+```{r}
+install.packages('e1071')
+library(e1071)
+```
+Tend to fitting:
+```{r}
+svm_classifier <- svm(formula = facies ~ ., data=training_df, type = 'C-classification',kernel="linear")
+svm_classifier
+```
+Predicting the test set result:
+```{r}
+y_pred = predict(svm_classifier, newdata = test_df[-4])
+y_pred
+```
+Let us see confusion matrix like below command:
+```{r}
+confusion_matrix <- table(test_df[, 3], y_pred)
+confusion_matrix
+```
+
+Okay, so, we showed confusion matrix and last step is to see accuracy. We look for where Facies column is not equal to our prediction and calculating mean after then. Subtracting it from 1 will give us accuracy level.
+```{r}
+svm_accuracy = 1-mean(test_df$facies != y_pred)
+svm_accuracy
+```
+Done, great! It is closer to 1. Therefore we can say that it is working well.
+
+*SVM for litgotype column*
+
+Now let us do these steps for lithotype column. Oops, we must ignore sp column. Let us see our dataframe again.
+```{r}
+head(df)
+```
+We have chosen specified columns to continue using subset function:
+
+```{r}
+svm_df<-subset(df, select = c(depth, vsh, lithotype))
+head(svm_df)
+```
+
+Now, we change our target to lithotype column.
+```{r}
+svm_df$lithotype <-factor(svm_df$lithotype, levels = c('S1', 'S2', 'S3', 'S4', 'S5'))
+```
+Again, we are splitting our data into training set and test set:
+```{r}
+set.seed(123)
+split <- sample.split(svm_df$lithotype, SplitRatio = 0.75) # 75% and 25%
+
+training_df <- subset(svm_df, split == TRUE)
+test_df <- subset(svm_df, split == FALSE)
+```
+
+Now let us see how our training set and test dataset look like:
+```{r}
+head(training_df) # training dataset
+```
+```{r}
+head(test_df) # test dataset
+```
+Let us scale our features to the size that computer can easily understand:
+```{r}
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+```
+
+After making this operation, our datasets will be like below:
+```{r}
+head(training_df)
+```
+
+```{r}
+head(test_df)
+```
+
+Now, we will try to fit SVM to our trained set for column lithotype. As we already installed needed package, let us fit directly.
+```{r}
+svm_classifier <- svm(formula = lithotype ~ ., data=training_df, type = 'C-classification',kernel="linear")
+svm_classifier
+```
+
+Predicting the test set result:
+```{r}
+y_pred = predict(svm_classifier, newdata = test_df[-3])
+y_pred
+```
+Let us see confusion matrix like below command:
+```{r}
+confusion_matrix <- table(test_df[, 3], y_pred)
+confusion_matrix
+```
+And exciting moment! Last one, accuracy! We will see.
+```{r}
+svm_accuracy = 1-mean(test_df$lithotype != y_pred)
+svm_accuracy
+```
+
+Great! Again we got value that is closer to 1. So, this means we did awesome job. Let's tend to KNN!
+
+
+
+
+
+**KNN**
+
+KNN stands for K-nearest neighbors and it is one of the supervised learning methods that is used for classification and regression. We need to install class package.
+```{r}
+install.packages("class")
+library(class)
+```
+
+
+*KNN for facies column*
+
+We will use below dataset now:
+```{r}
+knn_df <- subset(df, select = c(depth, vsh, facies))
+head(knn_df)
+```
+
+Here, our target feature is facies column. Let us take it into account like below:
+```{r}
+knn_df$facies<-factor(knn_df$facies, levels = c(0,1,2))
+```
+
+Now, we are splitting our data into parts like training set and test set:
+```{r}
+set.seed(123)
+split <- sample.split(knn_df$facies, SplitRatio = 0.75) # 75% and 25%
+
+training_df <- subset(knn_df, split == TRUE)
+test_df <- subset(knn_df, split == FALSE)
+```
+Let us scale our features to the size that computer can easily understand:
+```{r}
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+```
+After making this operation, our datasets will be like below:
+```{r}
+head(training_df)
+```
+
+```{r}
+head(test_df)
+```
+Let us fit KNN model to fit train dataset, I am going to take k as 3:
+```{r}
+knn_classifier <- knn(train = training_df[,-3], test = test_df[,-3], cl = training_df$facies, k=3)
+knn_classifier
+```
+
+Let us see confusion matrix like below command:
+```{r}
+confusion_matrix <- table(test_df[, 3], knn_classifier)
+confusion_matrix
+```
+Okay, so, we showed confusion matrix and last step is to see accuracy.
+```{r}
+knn_accuracy = 1-mean(test_df$facies != knn_classifier)
+knn_accuracy
+```
+
+Again, close to 1. So it is great!
+
+*KNN for lithotype*
+
+Let us specify our dataset:
+```{r}
+knn_df <- subset(df, select = c(depth, vsh, lithotype))
+head(knn_df)
+```
+
+Here, our target feature is lithotype column. Let us take it into account like below:
+```{r}
+knn_df$lithotype<-factor(knn_df$lithotype, levels = c('S1', 'S2', 'S3', 'S4', 'S5'))
+```
+
+Now, we are splitting our data into parts like training set and test set:
+```{r}
+set.seed(123)
+split <- sample.split(knn_df$lithotype, SplitRatio = 0.75) # 75% and 25%
+
+training_df <- subset(knn_df, split == TRUE)
+test_df <- subset(knn_df, split == FALSE)
+```
+Let us scale our features to the size that computer can easily understand:
+```{r}
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+```
+
+After making this operation, our datasets will be like below:
+
+```{r}
+head(training_df)
+```
+```{r}
+head(test_df)
+```
+
+Let us fit KNN model to fit train dataset, I am going to take k as 3:
+```{r}
+knn_classifier <- knn(train = training_df[,-3], test = test_df[,-3], cl = training_df$lithotype, k=3)
+knn_classifier
+```
+Let us see confusion matrix like below command:
+```{r}
+confusion_matrix <- table(test_df[, 3], knn_classifier)
+confusion_matrix
+```
+So, as we showed confusion matrix and last step is to see accuracy.
+```{r}
+knn_accuracy = 1-mean(test_df$lithotype != knn_classifier)
+knn_accuracy
+```
+Works fine!
+
+**RF**
+
+RF stands for Random Forest and is an ensemble learning method that is used for classification and regression. To work with the random forest we are installing the library named "randomForest".
+```{r}
+install.packages("randomForest")
+library(randomForest)
+```
+
+*RF for facies*
+
+We will use below dataset now:
+
+```{r}
+rf_df <- subset(df, select = c(depth, vsh, facies))
+head(rf_df)
+```
+
+Here, our target feature is facies column. Let us take it into account like below:
+```{r}
+rf_df$facies<-factor(rf_df$facies, levels = c(0,1,2))
+```
+Now, we are splitting our data into parts like training set and test set:
+
+```{r}
+set.seed(123)
+split <- sample.split(rf_df$facies, SplitRatio = 0.75) # 75% and 25%
+
+training_df <- subset(rf_df, split == TRUE)
+test_df <- subset(rf_df, split == FALSE)
+```
+Let us scale our features to the size that computer can easily understand:
+```{r}
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+```
+After making this operation, our datasets will be like below:
+
+```{r}
+head(training_df)
+```
+```{r}
+head(test_df)
+```
+
+Let us fit RF model to fit train dataset:
+```{r}
+rf_classifier = randomForest(x = training_df[,-3], y = training_df$facies, ntree = 500)
+rf_classifier
+```
+Let us go to prediction step for test set results:
+```{r}
+y_pred = predict(rf_classifier, newdata = test_df[-3])
+y_pred
+```
+Let us see confusion matrix like below command:
+```{r}
+confusion_matrix <- table(test_df[, 3], y_pred)
+confusion_matrix
+```
+Okay, so, we showed confusion matrix and last step is to see accuracy.
+```{r}
+rf_accuracy = 1-mean(test_df$facies != y_pred)
+rf_accuracy
+```
+Great result! Now, let us do same steps for lithotype column
+
+*RF for lithotype*
+
+We will use below dataset now:
+
+```{r}
+rf_df <- subset(df, select = c(depth, vsh, lithotype))
+head(rf_df)
+```
+
+Here, our target feature is lithotype column. Let us take it into account like below:
+
+```{r}
+rf_df$lithotype<-factor(rf_df$lithotype, levels = c('S1', 'S2', 'S3', 'S4', 'S5'))
+```
+Now, we are splitting our data into parts like training set and test set:
+```{r}
+set.seed(123)
+split <- sample.split(rf_df$lithotype, SplitRatio = 0.75) # 75% and 25%
+
+training_df <- subset(rf_df, split == TRUE)
+test_df <- subset(rf_df, split == FALSE)
+```
+
+Let us scale our features to the size that computer can easily understand:
+```{r}
+training_df[-3] <- scale(training_df[-3])
+test_df[-3] <- scale(test_df[-3])
+```
+After making this operation, our datasets will be like below:
+```{r}
+head(training_df)
+```
+```{r}
+head(test_df)
+```
+
+Let us fit RF model to fit train dataset:
+
+```{r}
+rf_classifier = randomForest(x = training_df[,-3], y = training_df$lithotype, ntree = 500)
+rf_classifier
+```
+Let us go to prediction step for test set results:
+```{r}
+y_pred = predict(rf_classifier, newdata = test_df[-3])
+y_pred
+```
+Let us see confusion matrix like below command:
+
+```{r}
+confusion_matrix <- table(test_df[, 3], y_pred)
+confusion_matrix
+```
+Okay, so, we showed confusion matrix and last step is to see accuracy.
+```{r}
+rf_accuracy = 1-mean(test_df$lithotype != y_pred)
+rf_accuracy
+```
+
+And that's it! We got great results. Our all models works very well.

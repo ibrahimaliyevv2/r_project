@@ -1,0 +1,6 @@
+"0","knn_accuracy = 1-mean(test_df$lithotype != knn_classifier)"
+"0","knn_accuracy"
+"1","[1]"
+"1"," 0.9803241"
+"1","
+"

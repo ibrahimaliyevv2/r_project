@@ -1,0 +1,2 @@
+"0","rf_df <- subset(df, select = c(depth, vsh, facies))"
+"0","head(rf_df)"
